@@ -1,0 +1,86 @@
+Examen Junio 2026 V1
+
+Proyectos y carpetas presentes en el repositorio del examen:
+
+- data: contiene un fichero CSV con datos de pacientes, sus tratamientos y los medicamentos de una clínica médica.
+- android: cliente fork del almacen para acceder a los datos del backend "clinica"
+- importDataClient: proyecto Java-Gradle para intellij que se encargará de leer los datos de un fichero CSV y "enviarlos" al servidor utilizando peticiones POST con Okhttp y la API definida en los servlets del backend
+- servlets: proyecto Java Maven J2EE con servlets para servidor Tomcat 9 con la estructura para realizar el backend de la clínica
+- infraestructura: script docker-compose y de BBDD mysql para crear las máquinas virtuales necesarias para la implementación del backend
+
+Objetivos:
+
+Ejercicio 1. Json to BBDD
+Realizar el cliente de importación de datos en Java. Completar el proyecto de la carpeta importDataClient, de manera que este lea el fichero CSV, lo convierta a datos del modelo de la clínica (Pacientes, Tratamientos, Medicamentos) y los envíe a la BBDD asociada al backend utilizando el servlet importData. Podéis estructurar este proyecto como queráis, creando una vista "mínima", pero es obligatorio usar OKHttp como librería de trabajo para enviar los datos leídos del fichero, y se aconseja mandar los datos en JSON al servidor para que el servlet lo procese. Para ello, tenéis que utilizar el siguiente código en el cliente:
+
+OkHttpClient client = new OkHttpClient();
+
+String json = "...tu json...";
+
+RequestBody body = RequestBody.create(
+    json,
+    MediaType.parse("application/json")
+);
+
+Request request = new Request.Builder()
+    .url("http://midominio.com/importar")
+    .post(body)
+    .build();
+
+Response response = client.newCall(request).execute();
+
+
+En este caso, como es un POST, y no un GET, no hay que "esperar" nada. Por lo que no hay que "encolar" ni crear una Callback. Para ver que funciona, nos vamos a la BBDD y vemos si están los datos.
+
+NOTA IMPORTANTE: Si algún dato importado ya está en la BBDD, tenemos que hacer que no pase nada, los datos que NO estén SI deben de introducirse en la BBDD, los que ya están, se ignoran.
+
+EVALUACIÓN: 
+- Lectura del fichero: 2p
+- Transformación (parser) del CSV a modelo: 2p
+- Envío de datos al servidor: 2p
+
+Ejercicio 2. Server
+Completa el proyecto de servlets para construir los puntos de acceso (tantos servlets como puntos de acceso) descritos en el interface DataAccess del package controller.
+
+ - public String listAllMedicamentos(); -> Accede a la BBDD y obtiene todos los medicamentos disponibles
+ - public String findMedicamentoXCodigo(String code); -> Accede a la BBDD y busca el medicamento que coindice con codigo=code
+ - public String findPacienteXDNI(String dni); -> Accede a la BBDD y busca el cliente con el DNI=dni
+ - public String listMedicamentosXTratamiento(String dni, String tratamiendo_id); -> Accede a la BBDD y busca todos los medicamenntos asociados en el id_tratamiento=tratamiento y para el paciente DNI=dni
+ - public String importData(String jsonDataFromCSV); -> parsea el json con los datos del CSV leído en el programa de importación y realiza los INSERT adecuados para actualizar la BBDD con la info almacenada en ese JSON
+
+IMPORTANTE: Este último método tiene que llamarlo un servlet que implemente el método doPost, si no no funcionará. Para "recoger" los datos del json, al ser un parámetro POST, en el servlet, tenéis que usar el siguiente código:
+
+BufferedReader br = request.getReader();
+
+String linea;
+StringBuilder sb = new StringBuilder();
+
+while((linea = br.readLine()) != null){
+    sb.append(linea);
+}
+
+String json = sb.toString();
+
+EVALUACIÓN:
+- Cada servlet con su método del controlador y con su acceso a BBDD: 2p
+- El servlet de importación: 6p
+
+Ejercicio 3. Cliente Android
+Usando de base el proyecto de la app del almacen, cambia la app para que muestre una lista en la MainActivity con los Pacientes de la clínica existentes en la BBDD, o con los medicamentos existentes en la BBDD. Para ello, quita el "formulario" de introducción de nuevos productos del almacen y pon un sólo campo de introducción de datos para meter un dni, poniendo dos botones, uno llamado "Pacientes" y otro "Medicamentos", de manera que según se pulse uno u otro, se muestren uno u otro listado (en el caso de "Pacientes" mostrará el paciente que tenga ESE DNI introducido).
+
+EVALUACIÓN:
+- Modificación adecuada del interfaz gráfico: 2p
+- Modificación de la lógica de petición de datos: 4p
+
+
+
+TOTAL EXAMEN: 20 puntos. Para aprobar: 10 puntos.
+
+
+
+
+
+
+
+
+

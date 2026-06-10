@@ -1,0 +1,9 @@
+# Ignorar datos de base de datos
+infraestructura/.db_data/
+
+# Ignorar archivos temporales de IDEs
+.idea/
+
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db

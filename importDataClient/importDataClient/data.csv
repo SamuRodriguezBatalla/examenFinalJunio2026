@@ -1,0 +1,62 @@
+Paciente;12345678A;Ana;López;ana.lopez@example.com;+34 600 111 222;Calle A 10 Madrid
+Paciente;23456789B;Luis;Pérez;luis.perez@example.com;+34 611 222 333;Calle B 20 Valencia
+Paciente;34567890C;Marta;García;marta.garcia@example.com;+34 622 333 444;Calle C 30 Sevilla
+Paciente;45678901D;Carlos;Ruiz;carlos.ruiz@example.com;+34 633 444 555;Calle D 40 Bilbao
+Paciente;56789012E;Lucía;Fernández;lucia.fernandez@example.com;+34 644 555 666;Calle E 50 Málaga
+Paciente;67890123F;Javier;Sánchez;javier.sanchez@example.com;+34 655 666 777;Calle F 60 Zaragoza
+Paciente;78901234G;Elena;Martín;elena.martin@example.com;+34 666 777 888;Calle G 70 Granada
+Paciente;89012345H;Pedro;Navarro;pedro.navarro@example.com;+34 677 888 999;Calle H 80 Murcia
+Paciente;90123456I;Sofía;Ortega;sofia.ortega@example.com;+34 688 999 000;Calle I 90 Valladolid
+Paciente;11235813J;Diego;Torres;diego.torres@example.com;+34 699 000 111;Calle J 100 Alicante
+
+Tratamiento;1001;12345678A;2025-03-12;7;Infección respiratoria leve
+Tratamiento;1002;23456789B;2025-01-20;10;Bronquitis aguda
+Tratamiento;1003;34567890C;2025-07-15;5;Rinitis alérgica
+Tratamiento;1004;45678901D;2025-02-10;14;Lumbalgia mecánica
+Tratamiento;1005;56789012E;2025-08-21;7;Otitis media
+Tratamiento;1006;67890123F;2025-04-05;21;Hipertensión arterial
+Tratamiento;1007;78901234G;2025-05-18;10;Gastritis
+Tratamiento;1008;89012345H;2025-10-11;14;Sinusitis
+Tratamiento;1009;90123456I;2025-11-25;30;Diabetes tipo 2
+Tratamiento;1010;11235813J;2025-12-12;15;Ansiedad leve
+
+Medicamento;MED001;Ibuprofeno 600 mg;Tomar 1 comprimido cada 8 horas después de las comidas
+Medicamento;MED002;Paracetamol 1 g;Tomar 1 comprimido cada 8 horas si existe dolor
+Medicamento;MED003;Amoxicilina 500 mg;Tomar 1 cápsula cada 8 horas durante 7 días
+Medicamento;MED004;Omeprazol 20 mg;Tomar 1 cápsula en ayunas
+Medicamento;MED005;Loratadina 10 mg;Tomar 1 comprimido al día
+Medicamento;MED006;Azitromicina 500 mg;Tomar 1 comprimido al día durante 3 días
+Medicamento;MED007;Enalapril 20 mg;Tomar 1 comprimido cada mañana
+Medicamento;MED008;Metformina 850 mg;Tomar 1 comprimido cada 12 horas
+Medicamento;MED009;Diazepam 5 mg;Tomar 1 comprimido por la noche
+Medicamento;MED010;Naproxeno 500 mg;Tomar 1 comprimido cada 12 horas
+
+MedicamentoXTratamiento;1001;MED001
+MedicamentoXTratamiento;1001;MED004
+
+MedicamentoXTratamiento;1002;MED003
+MedicamentoXTratamiento;1002;MED002
+
+MedicamentoXTratamiento;1003;MED005
+MedicamentoXTratamiento;1003;MED002
+
+MedicamentoXTratamiento;1004;MED010
+MedicamentoXTratamiento;1004;MED004
+
+MedicamentoXTratamiento;1005;MED003
+MedicamentoXTratamiento;1005;MED002
+
+MedicamentoXTratamiento;1006;MED007
+MedicamentoXTratamiento;1006;MED004
+
+MedicamentoXTratamiento;1007;MED004
+MedicamentoXTratamiento;1007;MED002
+
+MedicamentoXTratamiento;1008;MED003
+MedicamentoXTratamiento;1008;MED005
+
+MedicamentoXTratamiento;1009;MED008
+MedicamentoXTratamiento;1009;MED007
+
+MedicamentoXTratamiento;1010;MED009
+MedicamentoXTratamiento;1010;MED002
