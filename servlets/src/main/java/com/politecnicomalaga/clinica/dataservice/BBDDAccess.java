@@ -78,22 +78,22 @@ public class BBDDAccess {
     }
 
     // public String listMedicamentosXTratamiento(String dni, String tratamiendo_id); //-> Accede a la BBDD y busca todos los medicamenntos asociados en el id_tratamiento=tratamiento y para el paciente DNI=dni
-    public List<Map<String,Object>> listarMedicamentosXTratamiento(String codigo, String tratamiento_id) throws SQLException, ClassNotFoundException{
+    public List<Map<String,Object>> listarMedicamentosXTratamiento(String dni, String tratamiento_id) throws SQLException, ClassNotFoundException{
         Connection conn = ConexionBD.getConnection();
         List<Map<String,Object>> lista = new ArrayList<>();
         String sql = "SELECT md.codigo, md.nombre, mt.id_registro " +
                 "FROM medicamentos md " +
                 "JOIN medicamentos_tratamiento mt ON md.codigo = mt.codigo_medicamento " +
                 "JOIN tratamientos tr ON mt.id_tratamiento = tr.id_tratamiento " +
-                "WHERE md.codigo = ? AND tr.id_tratamiento = ?";
+                "WHERE tr.dni_paciente = ? AND tr.id_tratamiento = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, codigo);
+        pstmt.setString(1, dni);
         pstmt.setInt(2,Integer.parseInt(tratamiento_id));
         ResultSet rs = pstmt.executeQuery();
 
         while (rs.next()){
             Map<String,Object> item = new HashMap<>();
-            item.put("codigo", rs.getInt("codigo"));
+            item.put("codigo", rs.getString("codigo"));
             item.put("nombre", rs.getString("nombre"));
             item.put("id_registro", rs.getInt("id_registro"));
             lista.add(item);
